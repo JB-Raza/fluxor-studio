@@ -6,6 +6,7 @@ import Reveal from '../components/ui/Reveal'
 import { gsap, useGSAP } from '../lib/gsap'
 import { prefersReducedMotion } from '../lib/motion'
 import { splitText } from '../hooks/useSplitText'
+import { aboutMedia } from '../data/assets'
 import { aboutSection } from '../data/stats'
 import StatsBar from './StatsBar'
 
@@ -89,16 +90,26 @@ export default function About() {
           {aboutSection.headline}
         </AnimatedHeading>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {aboutSection.body.map((paragraph) => (
-            <p
-              key={paragraph.slice(0, 24)}
-              data-about-para
-              className="text-secondary leading-relaxed"
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(220px,280px)_1fr] lg:items-start">
+          <Reveal className="mx-auto w-full max-w-[280px] lg:mx-0">
+            <img
+              src={aboutMedia.portrait}
+              alt={aboutMedia.portraitAlt}
+              loading="lazy"
+              className="aspect-[4/5] w-full rounded-2xl border border-border object-cover object-top"
+            />
+          </Reveal>
+          <div className="grid gap-6 md:grid-cols-2">
+            {aboutSection.body.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 24)}
+                data-about-para
+                className="text-secondary leading-relaxed"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
 
         <StatsBar />

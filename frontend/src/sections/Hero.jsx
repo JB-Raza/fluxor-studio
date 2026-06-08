@@ -12,6 +12,7 @@ import {
   socialProofLine,
 } from '../data/nav'
 import { useRotatingText } from '../hooks/useRotatingText'
+import { heroMedia } from '../data/assets'
 
 export default function Hero({ started = true }) {
   const { current: rotatingLabel, index } = useRotatingText(heroLabels, 2800, started)
@@ -145,6 +146,25 @@ export default function Hero({ started = true }) {
       className="relative flex min-h-screen flex-col justify-center px-6 pb-16 pt-28"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {!prefersReducedMotion() && (
+          <video
+            className="absolute inset-0 h-full w-full object-cover opacity-35"
+            src={heroMedia.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+        )}
+        <img
+          src={heroMedia.crystal2}
+          alt=""
+          className="absolute bottom-0 right-0 w-[min(55vw,520px)] max-w-none animate-spin opacity-25 mix-blend-screen [animation-duration:40s] motion-reduce:animate-none"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
         <div
           ref={glowARef}
           className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-accent/10 blur-[120px]"

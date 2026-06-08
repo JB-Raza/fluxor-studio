@@ -1,22 +1,47 @@
-// Single swap-point between placeholder gradients (now) and real assets (later).
+import { useEffect, useRef } from 'react'
+import { refreshScrollTriggers } from '../../lib/scrollTriggers'
+
+// Single swap-point between placeholder gradients and real assets.
 export default function Media({
   type = 'image',
   src,
   poster,
   alt = '',
-  aspect = '4/3',
+  aspect,
   placeholder = 'from-violet-900/40 to-background',
   className = '',
+  objectFit = 'cover',
+  onLoaded,
 }) {
+  const notified = useRef(false)
+
+  const handleLoaded = () => {
+    if (notified.current) return
+    notified.current = true
+    refreshScrollTriggers()
+    onLoaded?.()
+  }
+
+  useEffect(() => {
+    notified.current = false
+  }, [src])
+
   if (!src) {
     return (
       <div
         className={`bg-gradient-to-br ${placeholder} ${className}`}
-        style={{ aspectRatio: aspect }}
+        style={aspect ? { aspectRatio: aspect } : undefined}
         aria-hidden="true"
       />
     )
   }
+
+  const fitClass =
+    objectFit === 'cover'
+      ? 'object-cover'
+      : objectFit === 'contain'
+        ? 'object-contain'
+        : ''
 
   if (type === 'video') {
     return (
@@ -27,8 +52,10 @@ export default function Media({
         muted
         loop
         playsInline
-        className={className}
-        style={{ aspectRatio: aspect }}
+        preload="metadata"
+        onLoadedData={handleLoaded}
+        className={[fitClass, 'h-full w-full', className].filter(Boolean).join(' ')}
+        style={aspect ? { aspectRatio: aspect } : undefined}
       />
     )
   }
@@ -38,8 +65,9 @@ export default function Media({
       src={src}
       alt={alt}
       loading="lazy"
-      className={className}
-      style={{ aspectRatio: aspect }}
+      onLoad={handleLoaded}
+      className={[fitClass, 'h-full w-full', className].filter(Boolean).join(' ')}
+      style={aspect ? { aspectRatio: aspect } : undefined}
     />
   )
 }

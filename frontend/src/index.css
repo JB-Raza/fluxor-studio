@@ -103,3 +103,24 @@ body {
     animation: none;
   }
 }
+
+/* Slow 3D tumble for the CGI wireframe artifact */
+@keyframes spin-3d {
+  from {
+    transform: rotateX(-22deg) rotateY(0deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(-22deg) rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+@utility animate-spin-3d {
+  animation: spin-3d var(--spin-3d-duration, 26s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-3d {
+    animation: none;
+    transform: rotateX(-22deg) rotateY(28deg);
+  }
+}

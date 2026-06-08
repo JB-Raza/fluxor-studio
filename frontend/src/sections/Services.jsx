@@ -4,6 +4,7 @@ import AnimatedHeading from '../components/ui/AnimatedHeading'
 import Reveal from '../components/ui/Reveal'
 import { gsap, useGSAP } from '../lib/gsap'
 import { prefersReducedMotion } from '../lib/motion'
+import { decorMedia } from '../data/assets'
 import { services, servicesSection } from '../data/services'
 import ServiceCard from './ServiceCard'
 
@@ -117,7 +118,13 @@ export default function Services() {
 
       {/* Desktop: pinned scrub list */}
       <div ref={pinRef} className="relative mt-16 hidden overflow-hidden lg:block">
-        <div className="mx-auto grid min-h-screen max-w-7xl grid-cols-12 items-center gap-8 px-6 py-5 md:py-10">
+        <img
+          src={decorMedia.stacks}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-16 bottom-8 w-64 opacity-[0.07] md:w-80"
+        />
+        <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-12 items-center gap-8 px-6 py-5 md:py-10">
           {/* Left: glow + content circle (same dimensions) */}
           <div className="col-span-5 flex justify-center">
             <div className="relative aspect-square h-[min(52vmin,560px)] w-[min(52vmin,560px)] max-w-full">

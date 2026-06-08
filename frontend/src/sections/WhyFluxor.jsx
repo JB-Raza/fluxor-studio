@@ -5,6 +5,7 @@ import { gsap, useGSAP } from '../lib/gsap'
 import { ease, prefersReducedMotion } from '../lib/motion'
 import { differentiators, whyFluxorSection } from '../data/differentiators'
 import DifferentiatorCard from './DifferentiatorCard'
+import RotorArtifact from '../components/motion/RotorArtifact'
 
 export default function WhyFluxor() {
   const sectionRef = useRef(null)
@@ -65,9 +66,13 @@ export default function WhyFluxor() {
     <section
       id="why"
       ref={sectionRef}
-      className="scroll-mt-24 border-y border-border bg-surface/50 px-6 py-24 md:py-32"
+      className="relative scroll-mt-24 overflow-hidden border-y border-border bg-surface/50 px-6 py-24 md:py-32"
     >
-      <div className="mx-auto max-w-7xl">
+      <RotorArtifact
+        size={420}
+        className="absolute right-0 top-1/4 hidden -translate-y-1/4 opacity-[0.3] mix-blend-screen md:block lg:right-10"
+      />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel>{whyFluxorSection.label}</SectionLabel>
         <AnimatedHeading
           as="h2"

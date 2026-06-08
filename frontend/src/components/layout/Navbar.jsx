@@ -134,10 +134,52 @@ function NavItem({ link, onNavigate }) {
 export default function Navbar() {
   const headerRef = useRef(null)
   const barRef = useRef(null)
+  const mobilePanelRef = useRef(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
   const lastScroll = useRef(0)
   const hidden = useRef(false)
+
+  useGSAP(
+    () => {
+      const panel = mobilePanelRef.current
+      if (!panel) return undefined
+
+      const items = panel.querySelectorAll('[data-mobile-item]')
+
+      if (prefersReducedMotion()) {
+        gsap.set(panel, { height: mobileOpen ? 'auto' : 0, autoAlpha: mobileOpen ? 1 : 0 })
+        gsap.set(items, { opacity: 1, y: 0 })
+        return undefined
+      }
+
+      const tl = gsap.timeline()
+
+      if (mobileOpen) {
+        tl.set(panel, { autoAlpha: 1 })
+          .to(panel, { height: 'auto', duration: 0.4, ease: 'power3.out' })
+          .fromTo(
+            items,
+            { y: -10, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.32, stagger: 0.05, ease: 'power3.out' },
+            '-=0.18',
+          )
+      } else {
+        tl.to(items, {
+          y: -8,
+          opacity: 0,
+          duration: 0.2,
+          stagger: 0.03,
+          ease: 'power2.in',
+        })
+          .to(panel, { height: 0, duration: 0.32, ease: 'power3.inOut' }, '-=0.05')
+          .set(panel, { autoAlpha: 0 })
+      }
+
+      return () => tl.kill()
+    },
+    { dependencies: [mobileOpen] },
+  )
 
   useGSAP(
     () => {
@@ -206,7 +248,7 @@ export default function Navbar() {
         ref={barRef}
         className={[
           'border-b border-transparent backdrop-blur-md transition-[border-color] duration-300',
-          mobileOpen ? 'border-border bg-background/95' : '',
+          mobileOpen ? 'border-border' : '',
         ].join(' ')}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -241,12 +283,16 @@ export default function Navbar() {
           </button>
         </div>
 
-        {mobileOpen && (
-          <div className="border-t border-border px-6 py-6 lg:hidden">
+        <div
+          ref={mobilePanelRef}
+          className="invisible overflow-hidden lg:hidden"
+          style={{ height: 0 }}
+        >
+          <div className="border-t border-border px-6 py-6">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) =>
                 link.children ? (
-                  <div key={link.label} className="space-y-2">
+                  <div key={link.label} data-mobile-item className="space-y-2">
                     <p className="text-xs font-medium uppercase tracking-widest text-accent">
                       {link.label}
                     </p>
@@ -265,6 +311,7 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     to={{ pathname: '/', hash: link.href.replace('/#', '#') }}
+                    data-mobile-item
                     className="text-secondary hover:text-primary"
                     onClick={closeMobile}
                   >
@@ -274,6 +321,7 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     to={link.href}
+                    data-mobile-item
                     className="text-secondary hover:text-primary"
                     onClick={closeMobile}
                   >
@@ -281,12 +329,14 @@ export default function Navbar() {
                   </Link>
                 ),
               )}
-              <Button variant="primary" href={navCta.href} className="mt-4 w-full">
-                {navCta.label}
-              </Button>
+              <div data-mobile-item className="mt-4">
+                <Button variant="primary" href={navCta.href} className="w-full">
+                  {navCta.label}
+                </Button>
+              </div>
             </nav>
           </div>
-        )}
+        </div>
       </div>
     </header>
   )

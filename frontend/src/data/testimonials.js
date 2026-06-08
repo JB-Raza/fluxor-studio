@@ -3,11 +3,14 @@ export const testimonialsSection = {
   headline: "Don't Take Our Word for It.",
 }
 
+import { aboutMedia } from './assets'
+
 export const testimonials = [
   {
     quote:
       "Fluxor completely transformed how our product looked online. The CGI was so realistic, customers couldn't believe it wasn't a photo. Our conversion rate jumped 60% after the campaign.",
     author: 'E-commerce Brand Founder',
+    avatar: aboutMedia.portrait,
   },
   {
     quote:

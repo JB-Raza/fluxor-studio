@@ -125,6 +125,8 @@ export default function SelectedWork() {
               title={item.title}
               tags={item.tags}
               placeholder={item.placeholder}
+              video={item.video}
+              poster={item.poster}
               index={index}
               horizontal
             />
@@ -141,6 +143,8 @@ export default function SelectedWork() {
                 title={item.title}
                 tags={item.tags}
                 placeholder={item.placeholder}
+                video={item.video}
+                poster={item.poster}
                 index={index}
               />
             </Reveal>

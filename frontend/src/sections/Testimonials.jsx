@@ -137,7 +137,11 @@ export default function Testimonials() {
                 className="absolute inset-0"
                 style={{ opacity: index === 0 ? 1 : 0 }}
               >
-                <TestimonialCard quote={item.quote} author={item.author} />
+                <TestimonialCard
+                  quote={item.quote}
+                  author={item.author}
+                  avatar={item.avatar}
+                />
               </div>
             ))}
           </div>
@@ -167,7 +171,11 @@ export default function Testimonials() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2">
           {testimonials.map((item, index) => (
             <Reveal key={item.author} delay={index * 0.08} className="h-full">
-              <TestimonialCard quote={item.quote} author={item.author} />
+              <TestimonialCard
+                quote={item.quote}
+                author={item.author}
+                avatar={item.avatar}
+              />
             </Reveal>
           ))}
         </div>
