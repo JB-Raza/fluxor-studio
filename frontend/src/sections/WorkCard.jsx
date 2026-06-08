@@ -1,5 +1,5 @@
 import Tag from '../components/ui/Tag'
-import Media from '../components/media/Media'
+import HoverVideo from '../components/media/HoverVideo'
 import { useTilt } from '../hooks/useTilt'
 
 export default function WorkCard({
@@ -32,8 +32,7 @@ export default function WorkCard({
             className="absolute inset-0 scale-110 will-change-transform"
           >
             {video ? (
-              <Media
-                type="video"
+              <HoverVideo
                 src={video}
                 poster={poster}
                 placeholder={placeholder}

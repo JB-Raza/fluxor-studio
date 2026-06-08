@@ -3,10 +3,12 @@ import { useLocation } from 'react-router-dom'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { pageMeta } from '../data/nav'
 import { services, servicesSection } from '../data/services'
+import { servicePosters, serviceVideos } from '../data/assets'
 import PageHero from '../components/ui/PageHero'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/ui/Reveal'
 import Button from '../components/ui/Button'
+import HoverVideo from '../components/media/HoverVideo'
 
 const GRADIENTS = [
   'from-violet-900/50 to-background',
@@ -79,12 +81,14 @@ export default function Services() {
                   </Reveal>
 
                   <Reveal x={reversed ? -40 : 40} y={24}>
-                    <div
-                      className={`relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${GRADIENTS[index % GRADIENTS.length]}`}
-                    >
-                      <span className="absolute bottom-4 right-6 text-[7rem] font-light leading-none text-primary/10">
-                        {num(index)}
-                      </span>
+                    <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+                      <HoverVideo
+                        src={serviceVideos[service.id]}
+                        poster={servicePosters[service.id]}
+                        alt={service.title}
+                        placeholder={GRADIENTS[index % GRADIENTS.length]}
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                     </div>
                   </Reveal>
                 </div>

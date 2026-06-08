@@ -28,3 +28,22 @@ export const workVideos = {
   caseStudy: '/media/videos/work-case.mp4',
   motion: '/media/videos/work-motion.mp4',
 }
+
+// Keyed by service id (see data/services.js).
+export const serviceVideos = {
+  'cgi-production': '/media/services/CGI_skeleton.mp4',
+  vfx: '/media/services/particle_simulation.mp4',
+  '3d-animation': '/media/services/3d_character_animation.mp4',
+  'product-visualization': '/media/services/spinning_product_camera_360.mp4',
+  'motion-graphics': '/media/services/particle_motion_graphics.mp4',
+  'brand-films': '/media/services/brand_film.mp4',
+}
+
+export const servicePosters = {
+  'cgi-production': '/media/services/skeleton.png',
+  vfx: '/media/services/particle_simulation.png',
+  '3d-animation': '/media/services/3d_character.png',
+  'product-visualization': '/media/services/camera.png',
+  'motion-graphics': '/media/services/particle_motion.png',
+  'brand-films': '/media/services/product_branding.png',
+}
