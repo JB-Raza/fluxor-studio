@@ -15,7 +15,7 @@ export default function About() {
   usePageMeta(pageMeta.about)
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHero
         label="About Us"
         title="The Visual Agency Behind the Magic."

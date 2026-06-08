@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ScrollTrigger } from '../lib/gsap'
 import { pageMeta } from '../data/nav'
+import { usePageMeta } from '../hooks/usePageMeta'
 import Loader from '../sections/Loader'
 import Hero from '../sections/Hero'
 import SocialProof from '../sections/SocialProof'
@@ -19,11 +20,7 @@ export default function Home() {
   )
   const location = useLocation()
 
-  useEffect(() => {
-    document.title = pageMeta.home.title
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', pageMeta.home.description)
-  }, [])
+  usePageMeta(pageMeta.home)
 
   useEffect(() => {
     if (!loaderDone) return undefined
@@ -52,7 +49,11 @@ export default function Home() {
   return (
     <>
       <Loader onComplete={() => setLoaderDone(true)} />
-      <main className={loaderDone ? '' : 'overflow-hidden max-h-screen'}>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={loaderDone ? '' : 'overflow-hidden max-h-screen'}
+      >
         <Hero started={loaderDone} />
         <SocialProof />
         <SelectedWork />

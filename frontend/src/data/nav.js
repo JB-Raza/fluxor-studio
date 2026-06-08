@@ -2,7 +2,7 @@ export const siteName = 'FLUXOR'
 
 export const navLinks = [
   { label: 'About', href: '/about' },
-  { label: 'Work', href: '/#work' },
+  { label: 'Portfolio', href: '/portfolio' },
   {
     label: 'Services',
     href: '/services',
@@ -15,7 +15,6 @@ export const navLinks = [
       { label: 'Brand Films', href: '/services#brand-films' },
     ],
   },
-  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -59,6 +58,10 @@ export const socialProofClients = [
 export const footerTagline =
   'FLUXOR — The Content Creation Studio for Brands That Mean Business.'
 
+// Update siteUrl to the real production domain before launch.
+export const siteUrl = 'https://fluxor.studio'
+export const defaultOgImage = '/og-image.svg'
+
 export const pageMeta = {
   home: {
     title: 'Fluxor, Leading Content Creation Studio for CGI, VFX & 3D',
@@ -84,5 +87,10 @@ export const pageMeta = {
     title: 'Work With Fluxor: Content Creation Studio',
     description:
       'Ready to build something unforgettable? Contact Fluxor, your go-to content creation studio for CGI, VFX, and 3D video production.',
+  },
+  notFound: {
+    title: 'Page Not Found - Fluxor',
+    description:
+      "The page you're looking for doesn't exist. Head back to Fluxor's content creation studio for CGI, VFX, and 3D production.",
   },
 }

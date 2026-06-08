@@ -37,7 +37,7 @@ export default function Services() {
   }, [location.hash])
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHero
         label="Services"
         title={servicesSection.headline}

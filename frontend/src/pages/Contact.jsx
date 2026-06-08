@@ -31,7 +31,7 @@ export default function Contact() {
   }, [])
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHero
         label={contactSection.label}
         title={contactSection.headline}

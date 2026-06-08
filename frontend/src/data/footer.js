@@ -31,7 +31,6 @@ export const footerContent = {
         { label: 'hello@fluxor.studio', href: 'mailto:hello@fluxor.studio' },
         { label: 'Book a discovery call', href: '/contact' },
         { label: 'Portfolio', href: '/portfolio' },
-        { label: 'Blog', href: '/blog' },
       ],
     },
   ],

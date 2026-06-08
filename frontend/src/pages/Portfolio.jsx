@@ -44,7 +44,7 @@ export default function Portfolio() {
   )
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHero
         label="Work"
         title="Work That Refuses to Blend In."
