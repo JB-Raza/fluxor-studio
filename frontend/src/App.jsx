@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { gsap, ScrollTrigger } from './lib/gsap'
 import { prefersReducedMotion } from './lib/motion'
+import { prefetchMediaWhenIdle } from './lib/prefetchMedia'
+import { serviceVideos, workVideos } from './data/assets'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -16,6 +18,15 @@ export default function App() {
   const [displayLocation, setDisplayLocation] = useState(location)
   const displayedPathRef = useRef(location.pathname)
   const curtainRef = useRef(null)
+
+  // Warm the hover-video cache in the background once the page has loaded,
+  // so the first hover is instant without delaying first paint.
+  useEffect(() => {
+    prefetchMediaWhenIdle([
+      ...Object.values(workVideos),
+      ...Object.values(serviceVideos),
+    ])
+  }, [])
 
   useEffect(() => {
     // Same page (hash/search change only): swap instantly, no curtain.
