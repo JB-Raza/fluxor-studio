@@ -104,6 +104,7 @@ export default function HoverVideo({
           src={poster}
           alt={alt}
           loading="lazy"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (

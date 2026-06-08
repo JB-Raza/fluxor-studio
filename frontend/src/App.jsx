@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { gsap, ScrollTrigger } from './lib/gsap'
 import { prefersReducedMotion } from './lib/motion'
 import { prefetchMediaWhenIdle } from './lib/prefetchMedia'
-import { serviceVideos, workVideos } from './data/assets'
+import { servicePosters, serviceVideos, workPosters, workVideos } from './data/assets'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -20,13 +20,18 @@ export default function App() {
   const displayedPathRef = useRef(location.pathname)
   const curtainRef = useRef(null)
 
-  // Warm the hover-video cache in the background once the page has loaded,
-  // so the first hover is instant without delaying first paint.
+  // Warm media caches once the page has loaded. Posters (the visible static
+  // layer) go first at high priority; the heavy videos trickle in afterwards at
+  // low priority so they never starve the posters on slow connections.
   useEffect(() => {
-    prefetchMediaWhenIdle([
-      ...Object.values(workVideos),
-      ...Object.values(serviceVideos),
-    ])
+    prefetchMediaWhenIdle(
+      [...Object.values(workPosters), ...Object.values(servicePosters)],
+      { priority: 'high' },
+    )
+    prefetchMediaWhenIdle(
+      [...Object.values(workVideos), ...Object.values(serviceVideos)],
+      { priority: 'low' },
+    )
   }, [])
 
   useEffect(() => {
