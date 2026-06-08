@@ -92,21 +92,25 @@ function NavItem({ link, onNavigate }) {
       onMouseEnter={openNow}
       onMouseLeave={closeSoon}
     >
-      <button
-        type="button"
-        className="flex items-center gap-1 text-sm text-secondary transition-colors hover:text-primary"
-        onClick={() => setOpen((value) => !value)}
-        aria-expanded={open}
-      >
-        {link.label}
+      <div className="flex items-center gap-1">
+        <Link
+          to={link.href}
+          className="text-sm text-secondary transition-colors hover:text-primary"
+          onClick={() => {
+            setOpen(false)
+            onNavigate?.()
+          }}
+        >
+          {link.label}
+        </Link>
         <span
           aria-hidden="true"
-          className="inline-block transition-transform duration-300"
+          className="pointer-events-none inline-block text-xs text-secondary transition-transform duration-300"
           style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
         >
           ▾
         </span>
-      </button>
+      </div>
       <div
         ref={panelRef}
         className="invisible absolute left-0 top-full z-50 mt-3 min-w-[240px] rounded-xl border border-border bg-surface/95 py-2 shadow-xl backdrop-blur-md"
@@ -293,9 +297,13 @@ export default function Navbar() {
               {navLinks.map((link) =>
                 link.children ? (
                   <div key={link.label} data-mobile-item className="space-y-2">
-                    <p className="text-xs font-medium uppercase tracking-widest text-accent">
+                    <Link
+                      to={link.href}
+                      className="text-xs font-medium uppercase tracking-widest text-accent transition-colors hover:text-accent-hover"
+                      onClick={closeMobile}
+                    >
                       {link.label}
-                    </p>
+                    </Link>
                     {link.children.map((child) => (
                       <Link
                         key={child.href}

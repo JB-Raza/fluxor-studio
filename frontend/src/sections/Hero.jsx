@@ -158,12 +158,6 @@ export default function Hero({ started = true }) {
             aria-hidden="true"
           />
         )}
-        <img
-          src={heroMedia.crystal2}
-          alt=""
-          className="absolute bottom-0 right-0 w-[min(55vw,520px)] max-w-none animate-spin opacity-25 mix-blend-screen [animation-duration:40s] motion-reduce:animate-none"
-          aria-hidden="true"
-        />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
         <div
           ref={glowARef}

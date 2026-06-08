@@ -1,6 +1,5 @@
 export const heroMedia = {
   video: '/media/videos/hero-reel.mp4',
-  crystal2: '/media/images/crystal2.png',
 }
 
 export const aboutMedia = {
@@ -9,7 +8,6 @@ export const aboutMedia = {
 }
 
 export const decorMedia = {
-  blob: '/media/images/decor-blob.avif',
   stacks: '/media/images/decor-stacks.png',
 }
 
